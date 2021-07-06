@@ -42,17 +42,31 @@ def current_sig_headers(salt, timestamp, signature):
                    'idempotency': str(get_unix_time()) + salt}
     return sig_headers
 
-def get_auth_headers():
-    #Todo: add auth salting
-    headers = {
-      'Content-Type': 'application/json',
-      'access_key': '448B0C4C7F0125C5F34A',
-      'salt': '645384ed396279bd33c1ab45',
-      'timestamp': '1625579290',
-      'signature': 'YTM0MTZjNmQ5YWUyYzNiZmYxMjI5MGM3NmQ0MjExZjZiNjMzYzNiZmE1NDgwYjVmYTFjMWViOTEwMGZiNzM5Ng=='
-    }
+def pre_call(http_method, path, body=None):
+    str_body = json.dumps(body, separators=(',', ':'), ensure_ascii=False) if body else ''
+    salt, timestamp, signature = update_timestamp_salt_sig(http_method=http_method, path=path, body=str_body)
+    return str_body.encode('utf-8'), salt, timestamp, signature
 
-    return headers
+def create_headers(http_method, url,  body=None):
+    body, salt, timestamp, signature = pre_call(http_method=http_method, path=url, body=body)
+    return body, current_sig_headers(salt, timestamp, signature)
+
+def make_request(method,path,body=''):
+    body, headers = create_headers(method, base_url + path, body)
+
+    if method == 'get':
+        response = requests.get(base_url + path,headers=headers)
+    elif method == 'put':
+        response = requests.put(base_url + path, data=body, headers=headers)
+    elif method == 'delete':
+        response = requests.delete(base_url + path, data=body, headers=headers)
+    else:
+        response = requests.post(base_url + path, data=body, headers=headers)
+
+    if response.status_code != 200:
+        raise TypeError(response, method,base_url + path)
+    return json.loads(response.content)
+
 
 def create_payment(amt=10,curr="USD",CID="cus_d5f9da3c072ed93cf8cb2248114c751b", card_num="4111111111111111", exp_month="12", exp_yr="23", name="John Doe", cvv="345"):
     url = "https://sandboxapi.rapyd.net/v1/payments"
@@ -77,7 +91,7 @@ def create_payment(amt=10,curr="USD",CID="cus_d5f9da3c072ed93cf8cb2248114c751b",
       "capture": True
     })
 
-    headers = get_auth_headers()
+    headers = current_sig_headers()
 
     response = requests.request("POST", url, headers=headers, data=payload)
 
