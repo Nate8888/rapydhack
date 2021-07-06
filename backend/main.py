@@ -7,11 +7,14 @@ import base64
 import os
 import datetime
 import requests
+import hmac
+import base64
+import hashlib
 from flask import Flask, render_template, request, jsonify, redirect
 
 base_url = 'https://sandboxapi.rapyd.net'
-access_key = '<your-access-key>'
-secret_key = '<your-secret-key>'
+access_key = '448B0C4C7F0125C5F34A'
+secret_key = 'be61c0d38d1b573416eb4c99a41089277b040d14acfc4772effe986e38774e8ffee8e102755b0c8e'
 
 
 def generate_salt(length=12):
