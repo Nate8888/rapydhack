@@ -1,0 +1,62 @@
+.sign-up {
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.sign-up .logo {
+	text-align: center;
+	width: 130px;
+	padding: 50px 0;
+}
+
+.sign-up .title {
+	font-size: 1.2em;
+	font-weight: 900;
+	text-align: center;
+}
+
+.sign-up .card {
+	background-color: #fff;
+	border-radius: 15px;
+	box-shadow: 0 0 10px var(--border);
+	border: 1px solid var(--border);
+	padding: 10px;
+}
+
+.sign-up input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 16px;
+	border-radius: 8px;
+	margin-top: 15px;
+	border: 1px solid var(--malachi);
+}
+
+.sign-up .default-button {
+	display: inline-block;
+	width: 100%;
+	background: transparent;
+	border: none;
+	transition: 0.2s;
+	background-color: var(--malachi);
+	padding: 16px;
+	border-radius: 8px;
+	font-weight: bold;
+	color: #fff;
+	font-size: 1.1em;
+	margin-top: 15px;
+}
+
+.sign-up .default-button:hover {
+	opacity: 0.8;
+	transition: 0.2s;
+	cursor: pointer;
+}
+
+.sign-up .sub-text {
+	display: inline-block;
+	margin-top: 5px;
+	color: var(--primary);
+	text-decoration: none;
+}

@@ -1,0 +1,185 @@
+.plans {
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+	text-align: left;
+}
+
+.plans .title {
+	font-size: 1.9em;
+	font-weight: 800;
+	margin-top: 1em;
+}
+
+.plans .sub-title {
+	display: block;
+	margin-bottom: 1em;
+	color: var(--primary);
+}
+
+.plans .create {
+	background: transparent;
+	border: none;
+	background: rgb(48,206,241);
+	background: linear-gradient(9deg, rgba(48,206,241,1) 0%, rgba(49,208,173,1) 100%);
+	color: #fff;
+	padding: 8px 16px;
+	border-radius: 8px;
+	font-weight: 800;
+	transition: 0.2s;
+	margin-top: 20px;
+}
+
+.plans .create:hover {
+	transition: 0.2s;
+}
+
+.plans .create img {
+	width: 10px;
+	margin-right: 10px;
+	transition: 0.2s;
+}
+
+.plans .create:hover img {
+	margin-right: 18px;
+	transition: 0.2s;
+}
+
+.plans .user-plan {
+	gap: 15px;
+	text-align: center;
+	margin: 0 auto;
+	border-radius: 18px;
+	box-shadow: 0 0 10px var(--border);
+	padding: 15px;
+	width: 80%;
+	background-color: #fff;
+}
+
+.plans .user-plan p {
+	margin: 4px 0;
+}
+
+.plans .user-plan .img-container {
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.plans .user-plan img {
+	width: 100px;
+}
+
+.plans .user-plan section {
+	margin: 0 auto;
+	margin-top: 15px;
+}
+
+.plans .user-plan .item-name {
+	font-size: 1.1em;
+	font-weight: 800;
+}
+
+.plans .user-plan .item-price {
+	font-size: 0.9em;
+	color: var(--malachi-dark);
+}
+
+.plans .user-plan .to-go {
+	color: var(--chris);
+	border-radius: 20px;
+	padding: 4px 12px;
+	background-color: gold;
+	display: inline-block;
+	font-size: 0.9em;
+}
+
+.plans .user-plan .item-date {
+	color: var(--grey);
+	font-weight: 300;
+	font-size: 0.9em;
+}
+
+.plans .user-plan button {
+	background-color: var(--malachi);
+	color: #fff;
+	font-weight: 600;
+	border: none;
+	border-radius: 12px;
+	padding: 6px 14px;
+	margin-top: 8px;
+	transition: 0.2s;
+	box-shadow: 0 0 10px var(--border);
+	width: 100%;
+}
+
+.plans .user-plan button:hover {
+	background-color: var(--malachi);
+	transition: 0.2s;
+}
+
+.plans .footer-bg {
+	background-image: url('../../assets/bg-footer.svg');
+	background-repeat: no-repeat;
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	bottom: -50px;
+	right: -80px;
+	z-index: -99;
+}
+
+.plans .success {
+	background-color: #fff;
+	border-radius: 8px;
+	padding: 5px;
+	margin-top: 15px;
+	/* background-color: var(--malachi); */
+	/* color: #fff; */
+}
+
+.plans .success .title {
+	font-weight: bold;
+	font-size: 1.3em;
+	margin-bottom: 6px;
+}
+
+.plans .success .cb span {
+	background-color: var(--malachi);
+	color: #fff;
+	border-radius: 3px;
+	padding: 3px 8px;
+	font-weight: 800;
+}
+
+.plans .success small {
+	color: var(--grey-text);
+	display: inline-block;
+	margin-top: 6px;
+}
+
+.plans .success small span {
+	display: inline-block;
+	font-size: 0.9em;
+	border: 1px solid var(--border);
+	border-radius: 15px;
+	padding: 4px 9px;
+	box-shadow: 0 0 10px var(--border);
+	color: #fff;
+	font-weight: 800;
+	background: rgb(48,206,241);
+	background: linear-gradient(9deg, rgba(48,206,241,1) 0%, rgba(49,208,173,1) 100%);
+}
+
+.plans-container .hide-me {
+	background: transparent;
+	border: none;
+	color: var(--border);
+	position: absolute;
+	bottom: 0;
+}
