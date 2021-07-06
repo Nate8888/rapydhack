@@ -94,6 +94,7 @@ def create_payment(amt=10,curr="USD",CID="cus_d5f9da3c072ed93cf8cb2248114c751b",
     result = make_request('post', '/v1/payments', payload)
 
     print(result)
+    return result
 
 def complete_payment(payment_token="payment_6a9874e0b67a25c570ed72812a01b3cf"):
     payload = {
@@ -127,10 +128,18 @@ def request_payment():
     expd = request.form.get('expd')
     name = request.form.get('name')
     cvv = request.form.get("cvv")
+    # print(curr)
     returned_data = create_payment(amt=amt,curr=curr,CID=CID, card_num=card, exp_month=expm, exp_yr=expy, name=name, cvv=cvv)
-    print(returned_data)
+    print("================================pid=============================")
+    payment_id = returned_data['data']['id']
+
+    # Attempts to conclude payment. Simulating the user paying for the item
+    res = complete_payment(payment_token=payment_id)
+    print(res)
+
     return jsonify({'result': 'success'})
 
+# Endpoint in case we get a delayed payment id to conclude payment
 @app.route('/confirmpay', methods=['POST'])
 def confirm_payment():
     pay_token = request.form.get('token')
@@ -138,6 +147,7 @@ def confirm_payment():
 
     print(res)
     return jsonify({'result': 'success'})
+
 # Start Flask backend
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
