@@ -103,48 +103,54 @@ def complete_payment(payment_token="payment_6a9874e0b67a25c570ed72812a01b3cf"):
     result = make_request('post', '/v1/payments/completePayment', payload)
     print(result)
 
-def disburse_cashback():
+# Currently using demo data from rapyd just for the demo
+def disburse_cashback(rapyd_wallet = "ewallet_dfc659569155e576aad8d8cc334ed22e", amt="1"):
+
+    beneficary_data = {
+      "name": "Jane Doe",
+      "address": "456 Second Street",
+      "email": "janedoe@rapyd.net",
+      "country": "US",
+      "city": "Anytown",
+      "postcode": "10101",
+      "account_number": "BG96611020345678",
+      "bank_name": "US General Bank",
+      "state": "NY",
+      "identification_type": "SSC",
+      "identification_value": "123456789",
+      "bic_swift": "BUINBGSF",
+      "ach_code": "123456789"
+    }
+
+    sender_data = {
+      "name": "John Doe",
+      "address": "123 First Street",
+      "city": "Anytown",
+      "state": "NY",
+      "date_of_birth": "22/02/1980",
+      "postcode": "12345",
+      "phonenumber": "621212938122",
+      "remitter_account_type": "Individual",
+      "source_of_income": "salary",
+      "identification_type": "License No",
+      "identification_value": "123456789",
+      "purpose_code": "ABCDEFGHI",
+      "account_number": "123456789",
+      "beneficiary_relationship": "client"
+    }
+
 
     payload = {
-      "beneficiary": {
-        "name": "Jane Doe",
-        "address": "456 Second Street",
-        "email": "janedoe@rapyd.net",
-        "country": "US",
-        "city": "Anytown",
-        "postcode": "10101",
-        "account_number": "BG96611020345678",
-        "bank_name": "US General Bank",
-        "state": "NY",
-        "identification_type": "SSC",
-        "identification_value": "123456789",
-        "bic_swift": "BUINBGSF",
-        "ach_code": "123456789"
-      },
+      "beneficiary": beneficary_data,
       "beneficiary_country": "US",
       "beneficiary_entity_type": "individual",
-      "description": "Payout - Bank Transfer: Beneficiary/Sender objects",
+      "description": "Payout - Cash Back",
       "merchant_reference_id": "GHY-0YU-HUJ-POI",
-      "ewallet": "ewallet_dfc659569155e576aad8d8cc334ed22e",
-      "payout_amount": "1",
+      "ewallet": rapyd_wallet,
+      "payout_amount": amt,
       "payout_currency": "USD",
       "payout_method_type": "us_general_bank",
-      "sender": {
-        "name": "John Doe",
-        "address": "123 First Street",
-        "city": "Anytown",
-        "state": "NY",
-        "date_of_birth": "22/02/1980",
-        "postcode": "12345",
-        "phonenumber": "621212938122",
-        "remitter_account_type": "Individual",
-        "source_of_income": "salary",
-        "identification_type": "License No",
-        "identification_value": "123456789",
-        "purpose_code": "ABCDEFGHI",
-        "account_number": "123456789",
-        "beneficiary_relationship": "client"
-      },
+      "sender": sender_data,
       "sender_country": "US",
       "sender_currency": "USD",
       "sender_entity_type": "individual",
@@ -201,6 +207,16 @@ def confirm_payment():
     pay_token = request.form.get('token')
     res = complete_payment(payment_token=pay_token)
 
+    print(res)
+    return jsonify({'result': 'success'})
+
+@app.route('/payout', methods=['POST'])
+def pay_user():
+    # Get data from request
+    wallet = request.form.get('ewallet')
+    amt = request.form.get('amt')
+
+    res = disburse_cashback(rapyd_wallet = wallet, amt=amt)
     print(res)
     return jsonify({'result': 'success'})
 
