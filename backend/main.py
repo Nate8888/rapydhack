@@ -53,6 +53,7 @@ def create_headers(http_method, url,  body=None):
 
 def make_request(method,path,body=''):
     body, headers = create_headers(method, base_url + path, body)
+    # print(body, headers)
 
     if method == 'get':
         response = requests.get(base_url + path,headers=headers)
@@ -70,7 +71,7 @@ def make_request(method,path,body=''):
 
 def create_payment(amt=10,curr="USD",CID="cus_d5f9da3c072ed93cf8cb2248114c751b", card_num="4111111111111111", exp_month="12", exp_yr="23", name="John Doe", cvv="345"):
 
-    payload = json.dumps({
+    payload = {
       "amount": amt,
       "currency": curr,
       "customer": CID,
@@ -88,7 +89,7 @@ def create_payment(amt=10,curr="USD",CID="cus_d5f9da3c072ed93cf8cb2248114c751b",
         }
       },
       "capture": True
-    })
+    }
 
     result = make_request('post', '/v1/payments', payload)
 
