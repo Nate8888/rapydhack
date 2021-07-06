@@ -1,0 +1,36 @@
+.header-container .header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px;
+	padding-bottom: 0;
+}
+
+.header-container .header .hb {
+	width: 40px;
+	transition: 0.2s;
+}
+
+.header-container .header .hb:hover {
+	opacity: 0.5;
+	transition: 0.2s;
+}
+
+.header-container .header .logo {
+	width: 70px;
+}
+
+.header-container .header .img-container {
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.header-container .header .client-img {
+	border-radius: 50%;
+	width: 50px;
+}

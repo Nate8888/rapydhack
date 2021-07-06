@@ -1,0 +1,51 @@
+.footer {
+	background-color: #fff;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-top: 1px solid var(--border);
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.footer button {
+	transition: 0.2s;
+	background: transparent;
+	border: none;
+}
+
+.footer button:hover {
+	transition: 0.2s;
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.footer .logo {
+	width: 42px;
+}
+
+.footer .icon {
+	width: 30px;
+}
+
+.footer .icon-mag {
+	width: 25px;
+}
+
+.footer .img-container {
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.footer .client-img {
+	border-radius: 50%;
+	width: 50px;
+}
