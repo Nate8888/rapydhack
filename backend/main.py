@@ -55,11 +55,18 @@ def randomStringDigits(stringLength=8):
     lettersAndDigits = string.ascii_letters + string.digits
     return ''.join(random.choice(lettersAndDigits) for i in range(stringLength))
 
+
+app = Flask(__name__)
 # Test the api using json outputs.
 # The frontend will make requests to the API in order to use
 @app.route('/api', methods=['POST'])
 def info():
-  return jsonify({'result': 'success'})
+    return jsonify({'result': 'success'})
+
+@app.route('/test', methods=['POST'])
+def test():
+     create_payment()
+     return jsonify({'result': 'success'})
 
 # Start Flask backend
 if __name__ == '__main__':
