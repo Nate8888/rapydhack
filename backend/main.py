@@ -95,6 +95,13 @@ def create_payment(amt=10,curr="USD",CID="cus_d5f9da3c072ed93cf8cb2248114c751b",
 
     print(result)
 
+def complete_payment(payment_token="payment_6a9874e0b67a25c570ed72812a01b3cf"):
+    payload = {
+      "token": payment_token
+    }
+    result = make_request('post', '/v1/payments/completePayment', payload)
+    print(result)
+
 # Creates a random string with letters and numbers with default length of 8.
 def randomStringDigits(stringLength=8):
     lettersAndDigits = string.ascii_letters + string.digits
@@ -108,11 +115,29 @@ app = Flask(__name__)
 def info():
     return jsonify({'result': 'success'})
 
-@app.route('/test', methods=['POST'])
-def test():
-     create_payment()
-     return jsonify({'result': 'success'})
+@app.route('/reqpay', methods=['POST'])
+def request_payment():
+    #get all form data from api request
+    amt = request.form.get('amt')
+    curr = request.form.get('curr')
+    CID = request.form.get('CID')
+    card = request.form.get('card')
+    expm = request.form.get('expm')
+    expy = request.form.get('expy')
+    expd = request.form.get('expd')
+    name = request.form.get('name')
+    cvv = request.form.get("cvv")
+    returned_data = create_payment(amt=amt,curr=curr,CID=CID, card_num=card, exp_month=expm, exp_yr=expy, name=name, cvv=cvv)
+    print(returned_data)
+    return jsonify({'result': 'success'})
 
+@app.route('/confirmpay', methods=['POST'])
+def confirm_payment():
+    pay_token = request.form.get('token')
+    res = complete_payment(payment_token=pay_token)
+
+    print(res)
+    return jsonify({'result': 'success'})
 # Start Flask backend
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
