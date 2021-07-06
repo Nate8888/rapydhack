@@ -69,7 +69,6 @@ def make_request(method,path,body=''):
 
 
 def create_payment(amt=10,curr="USD",CID="cus_d5f9da3c072ed93cf8cb2248114c751b", card_num="4111111111111111", exp_month="12", exp_yr="23", name="John Doe", cvv="345"):
-    url = "https://sandboxapi.rapyd.net/v1/payments"
 
     payload = json.dumps({
       "amount": amt,
@@ -91,11 +90,9 @@ def create_payment(amt=10,curr="USD",CID="cus_d5f9da3c072ed93cf8cb2248114c751b",
       "capture": True
     })
 
-    headers = current_sig_headers()
+    result = make_request('post', '/v1/payments', payload)
 
-    response = requests.request("POST", url, headers=headers, data=payload)
-
-    print(response.text)
+    print(result)
 
 # Creates a random string with letters and numbers with default length of 8.
 def randomStringDigits(stringLength=8):
